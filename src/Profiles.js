@@ -1,20 +1,35 @@
 import React from 'react';
 import Profile from './Profile';
-import { Link, Route } from 'react-router-dom';
-import WithRouterSample from './WithRouterSample';
+import { NavLink, Route } from 'react-router-dom';
 
 function Profiles() {
     return (
         <div>
             <h3>사용자 목록</h3>
             <ul>
-                <li><Link to="/profiles/gudetama">gudetama</Link></li>
-                <li><Link to="/profiles/homer">homer</Link></li>
+                <li>
+                    <NavLink 
+                        to="/profiles/gudetama" 
+                        activeStyle={{ background: 'black', color: 'white' }}
+                        isActive={(match, location) => {
+                            return true;
+                        }}
+                    >
+                        gudetama
+                    </NavLink>
+                </li>
+                <li>
+                    <NavLink 
+                        to="/profiles/homer" 
+                        activeStyle={{ background: 'black', color: 'white' }}
+                    >
+                        homer
+                    </NavLink>
+                </li>
             </ul>
 
             <Route path="/profiles" exact render={() => <div>사용자를 선택해주세요</div>} />
             <Route path="/profiles/:username" component={Profile} />
-            <WithRouterSample />
         </div>
     );
 }
